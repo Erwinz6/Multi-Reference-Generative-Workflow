@@ -1,0 +1,12 @@
+﻿{
+  "project_root": ".",
+  "log_dir": "logs",
+  "comfyui_output_dir": "../ComfyUI/output",
+  "comfyui_temp_dir": "../ComfyUI/temp",
+  "workflow_path": "workflows/batik_workflow_api_1.json",
+  "workflow_presets": {
+    "text_to_image_flux": "workflows/batik_workflow_api_1.json",
+    "dual_reference_garment_transfer": "workflows/batik_garment_transfer_dual_reference.json"
+  },
+  "ue_import_path": "/Game/Generated"
+}
