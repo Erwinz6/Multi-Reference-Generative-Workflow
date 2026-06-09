@@ -1,0 +1,7 @@
+﻿{
+  "orchestrator_trigger_port": 3002,
+  "sdxl_sse_port": 8000,
+  "ue_bridge_port": 8001,
+  "ue_listener_port": 5000,
+  "comfyui_port": 8188
+}
