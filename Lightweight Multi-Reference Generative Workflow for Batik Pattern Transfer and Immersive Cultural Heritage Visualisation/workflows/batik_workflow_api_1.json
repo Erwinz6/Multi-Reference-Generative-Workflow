@@ -1,0 +1,221 @@
+{
+  "1": {
+    "inputs": {
+      "model_path": "svdq-int4_r32-flux.1-kontext-dev.safetensors",
+      "cache_threshold": 0,
+      "attention": "nunchaku-fp16",
+      "cpu_offload": "auto",
+      "device_id": 0,
+      "data_type": "bfloat16",
+      "i2f_mode": "enabled"
+    },
+    "class_type": "NunchakuFluxDiTLoader",
+    "_meta": {
+      "title": "Nunchaku FLUX DiT Loader"
+    }
+  },
+  "2": {
+    "inputs": {
+      "model_type": "flux",
+      "text_encoder1": "clip_l.safetensors",
+      "text_encoder2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "t5_min_length": 512,
+      "use_4bit_t5": "disable",
+      "int4_model": "none"
+    },
+    "class_type": "NunchakuTextEncoderLoader",
+    "_meta": {
+      "title": "Nunchaku Text Encoder Loader (Deprecated)"
+    }
+  },
+  "3": {
+    "inputs": {
+      "lora_name": "laran-lora36.safetensors",
+      "lora_strength": 1,
+      "model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "NunchakuFluxLoraLoader",
+    "_meta": {
+      "title": "Nunchaku FLUX LoRA Loader"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text": "A white batik-style ornamental pattern on a dark indigo blue background. The composition is centered around a large circular medallion with multiple concentric borders, surrounded by radiating spike-like elements that create a sunburst effect. Inside the circle are delicate floral motifs, small stars, stylized birds, and symmetrical decorative symbols arranged in a balanced radial pattern. Around the central medallion, the background is filled with curling vine-like motifs, circular floral emblems, spiral ornaments, and repeated bird figures, all rendered in fine hand-drawn white linework. The overall design has the appearance of a traditional Miao batik textile, elegant, intricate, symmetrical, and rich in ethnic decorative detail.",
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "6": {
+    "inputs": {
+      "guidance": 4.5,
+      "conditioning": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "7": {
+    "inputs": {
+      "model": [
+        "3",
+        0
+      ],
+      "conditioning": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "BasicGuider",
+    "_meta": {
+      "title": "基础引导"
+    }
+  },
+  "8": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "K采样器选择"
+    }
+  },
+  "10": {
+    "inputs": {
+      "noise_seed": 692744754967544
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "随机噪波"
+    }
+  },
+  "11": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "VAE加载器"
+    }
+  },
+  "13": {
+    "inputs": {
+      "samples": [
+        "42",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "20": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 30,
+      "denoise": 1,
+      "model": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "基础调度器"
+    }
+  },
+  "42": {
+    "inputs": {
+      "noise": [
+        "10",
+        0
+      ],
+      "guider": [
+        "7",
+        0
+      ],
+      "sampler": [
+        "8",
+        0
+      ],
+      "sigmas": [
+        "20",
+        0
+      ],
+      "latent_image": [
+        "43",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "自定义采样器(高级)"
+    }
+  },
+  "43": {
+    "inputs": {
+      "width": [
+        "48",
+        0
+      ],
+      "height": [
+        "49",
+        0
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "空Latent_SD3"
+    }
+  },
+  "46": {
+    "inputs": {
+      "filename_prefix": "蜡染",
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "48": {
+    "inputs": {
+      "value": 1024
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "整数"
+    }
+  },
+  "49": {
+    "inputs": {
+      "value": 1024
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "整数"
+    }
+  }
+}

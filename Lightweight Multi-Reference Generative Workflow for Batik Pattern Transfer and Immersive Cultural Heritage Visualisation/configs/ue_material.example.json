@@ -1,0 +1,7 @@
+{
+  "material_instance_name": "MI_PublicDemo_Display",
+  "texture_parameter_names": [
+    "GeneratedTexture"
+  ],
+  "import_texture_asset_name": "T_Generated_Dynamic"
+}
