@@ -1,0 +1,176 @@
+{
+  "1": {
+    "inputs": {
+      "cfg": 3.5,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "7",
+        1
+      ],
+      "negative": [
+        "7",
+        2
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFG引导"
+    }
+  },
+  "2": {
+    "inputs": {
+      "scheduler": "normal",
+      "steps": 20,
+      "denoise": 0.85,
+      "model": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "基础调度器"
+    }
+  },
+  "3": {
+    "inputs": {
+      "noise_seed": 1105719637674158
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "随机噪波"
+    }
+  },
+  "4": {
+    "inputs": {
+      "sampler_name": "euler_cfg_pp"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "K采样器选择"
+    }
+  },
+  "6": {
+    "inputs": {
+      "samples": [
+        "13",
+        0
+      ],
+      "vae": [
+        "14",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "7": {
+    "inputs": {
+      "positive": "Traditional Miao batik art masterpiece, top-down view. A magnificent white mandala design centered on a deep indigo blue fabric background. The mandala resembles a glowing sun with intricate light radiating outward to form a perfect circular pattern. Surrounding the center are exquisite motifs of swimming fish and flying birds, arranged in a strictly symmetrical composition, overlapping with blooming flowers and lush leaves. The texture features realistic wax resist dyeing effects with rich \"ice crackle\" details (binglie wen). High contrast, 8k resolution, macro photography, extremely detailed fabric grain, cultural heritage aesthetic.",
+      "negative": "blur, low quality, distortion, asymmetry, messy lines, watermark, text, signature, washed out colors, deformed fish, deformed birds.",
+      "打开可视化PromptUI": "",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "model": [
+        "8",
+        1
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "WeiLinComfyUIPromptToLoras",
+    "_meta": {
+      "title": "WeiLin 二合一提示词Lora自动加载"
+    }
+  },
+  "8": {
+    "inputs": {
+      "lora_str": "[{\"name\":\"LARAN\",\"weight\":0.8,\"text_encoder_weight\":0.6,\"hidden\":false,\"lora\":\"LARAN.safetensors\",\"loraWorks\":\"\"}]",
+      "temp_lora_str": "[{\"name\":\"LARAN\",\"weight\":0.8,\"text_encoder_weight\":0.6,\"hidden\":false,\"lora\":\"LARAN.safetensors\",\"loraWorks\":\"\"}]",
+      "打开Lora堆": "",
+      "clip": [
+        "14",
+        1
+      ],
+      "model": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "WeiLinPromptUIOnlyLoraStack",
+    "_meta": {
+      "title": "WeiLin Lora堆"
+    }
+  },
+  "11": {
+    "inputs": {
+      "images": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "12": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "13": {
+    "inputs": {
+      "noise": [
+        "3",
+        0
+      ],
+      "guider": [
+        "1",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "自定义采样器(高级)"
+    }
+  },
+  "14": {
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器(简易)"
+    }
+  }
+}
